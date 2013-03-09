@@ -74,12 +74,21 @@ class mm {
     }
 
     public function mount($name) {
+        if ($name === 'all') {return $this->all('mount');}
         if (!array_key_exists($name, $this->cfg)) {
             echo "No mount named '$name'. Try `./mm add` first\n"; return;
         }
 
         // cfg
         $cfg = $this->cfg[$name];
+
+        // local doesn't exist
+        if (!file_exists($cfg['local'])) {
+            mkdir($cfg['local'], 0777, true);
+        }
+        if (!file_exists($cfg['local'])) {
+            echo "Local folder '{$cfg['local']}' doesn't exist.\n"; return;
+        }
 
         // run the command
         $cmd = "sshfs -p {$cfg['port']} {$cfg['username']}@{$cfg['host']}:{$cfg['dir']} {$cfg['local']}";
@@ -98,6 +107,7 @@ class mm {
     }
 
     public function unmount($name) {
+        if ($name === 'all') {return $this->all('unmount');}
         if (!array_key_exists($name, $this->cfg)) {
             echo "No mount '$name'.\n"; return;
         }
@@ -147,6 +157,10 @@ class mm {
         $cfg['dir'] = $this->_ask(" Remote Dir:");
         $cfg['local'] = $this->_ask(" Local Folder:", "./$name");
 
+        if ($cfg['local']{0} == '~') {
+            $cfg['local'] = str_replace("~", $this->home, $cfg['local']);
+        }
+
         if (!file_exists($cfg['local'])) {
             mkdir($cfg['local'], 0777, true);
         }
@@ -176,6 +190,12 @@ class mm {
     public function ls() {
         foreach ($this->cfg as $name => $cfg) {
             echo sprintf("%-20s %-50s %d\n", $name, "{$cfg['username']}@{$cfg['host']}:{$cfg['dir']}", $cfg['pid']);
+        }
+    }
+
+    public function _all($func) {
+        foreach ($this->cfg as $name => $x) {
+            call_user_func(array($this, $func), $name);
         }
     }
 

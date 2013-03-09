@@ -4,8 +4,8 @@ mm - SSHFS Mount Manager
 Requirements
 -----------------
  * PHP >= 5.3.x
- * OSXFuse (https://github.com/osxfuse/osxfuse)
- * SSHFS (https://github.com/osxfuse/sshfs)
+ * [OSXFuse](https://github.com/osxfuse/osxfuse)
+ * [SSHFS](https://github.com/osxfuse/sshfs)
 
 Notes
 ------------------
@@ -14,11 +14,11 @@ Notes
 
 Install
 -----------------
-    curl https://raw.github.com/traviskuhl/mm/master/install | php
+ 1. [download](https://github.com/downloads/osxfuse/osxfuse/OSXFUSE-2.5.4.dmg) & install [OSXFuse](https://github.com/osxfuse/osxfuse)
+ 2. [download](https://github.com/downloads/osxfuse/sshfs/SSHFS-2.4.1.pkg) & install [SSHFS](https://github.com/osxfuse/sshfs)
+ 3. `curl https://raw.github.com/traviskuhl/mm/master/install | sudo php`
 
-or if you've cloned the git repo:
 
-    php install
 
 Useage
 -----------------
