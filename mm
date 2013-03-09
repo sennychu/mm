@@ -32,6 +32,8 @@ class mm {
 
         $this->args = $args;
 
+        $launch = array('ssh', 'subl');
+
         if ($cmd == 'unmount' OR $cmd == 'un') {
             $this->unmount($args[0]);
         }
@@ -46,6 +48,9 @@ class mm {
         }
         else if ($cmd == 'install') {
             $this->install();
+        }
+        else if (in_array($cmd, $launch)) {
+            $this->launch($cmd);
         }
         else if ($cmd OR $cmd == 'mount') {
             $this->mount(($cmd == 'mount' ? $args[0] : $cmd));
@@ -193,6 +198,23 @@ class mm {
         }
     }
 
+    public function launch($cmd) {
+        $name = $this->args[0];
+        if (!array_key_exists($name, $this->cfg)) {
+            echo "No mount '$name'.\n"; return;
+        }
+        $cfg = $this->cfg[$name];
+        switch($cmd) {
+            case 'ssh':
+                $run = "ssh -p {$cfg['port']} {$cfg['username']}@{$cfg['host']}";
+                exec('osascript -e "tell application \"Terminal\"" -e "tell application \"System Events\" to keystroke \"t\" using {command down}" -e "do script \"'.$run.'\" in front window" -e "end tell" > /dev/null'); break;
+            case 'subl':
+                exec("/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl {$cfg['local']}"); break;
+            default:
+                echo "Unknown launch command\n";
+        };
+    }
+
     public function _all($func) {
         foreach ($this->cfg as $name => $x) {
             call_user_func(array($this, $func), $name);
@@ -204,7 +226,6 @@ class mm {
         $name = trim(fgets(STDIN));
         return ($name ?: $def);
     }
-
 
 }
 
