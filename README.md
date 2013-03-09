@@ -7,6 +7,11 @@ Requirements
  * OSXFuse (https://github.com/osxfuse/osxfuse)
  * SSHFS (https://github.com/osxfuse/sshfs)
 
+Notes
+------------------
+ * I've only tested on OSX 10.8.2. No idea if it will work anywhere else
+ * Yes it's written in PHP.
+
 Install
 -----------------
     curl https://raw.github.com/traviskuhl/mm/master/install | php

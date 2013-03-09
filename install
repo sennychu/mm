@@ -23,7 +23,8 @@ if (file_exists("./mm")) {
     echo `sudo cp ./mm /usr/local/bin`;
 }
 else {
-    echo `sudo curl `;
+    echo `sudo curl -Ls "https://raw.github.com/traviskuhl/mm/master/mm" > /usr/local/bin/mm `;
+    echo `sudo chmod 755 /usr/local/bin/mm`;
 }
 
 echo "DONE\n";
