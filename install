@@ -1,0 +1,29 @@
+<?php
+
+$cwd = getcwd();
+
+$tmp = sys_get_temp_dir()."/mm".time();
+
+mkdir($tmp);
+
+chdir($tmp);
+
+echo `git clone --recursive git://github.com/osxfuse/osxfuse.git osxfuse`;
+echo `./osxfuse/build.sh -t dist`;
+
+echo `git clone git://github.com/osxfuse/sshfs.git`;
+chdir("./sshfs");
+echo `autoreconf -i`;
+echo `./configure`;
+echo `make && sudo make install`;
+
+chdir($cwd);
+
+if (file_exists("./mm")) {
+    echo `sudo cp ./mm /usr/local/bin`;
+}
+else {
+    echo `sudo curl `;
+}
+
+echo "DONE\n";
