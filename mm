@@ -74,7 +74,7 @@ class mm {
     }
 
     public function mount($name) {
-        if ($name === 'all') {return $this->all('mount');}
+        if ($name === 'all') {return $this->_all('mount');}
         if (!array_key_exists($name, $this->cfg)) {
             echo "No mount named '$name'. Try `./mm add` first\n"; return;
         }
@@ -107,7 +107,7 @@ class mm {
     }
 
     public function unmount($name) {
-        if ($name === 'all') {return $this->all('unmount');}
+        if ($name === 'all') {return $this->_all('unmount');}
         if (!array_key_exists($name, $this->cfg)) {
             echo "No mount '$name'.\n"; return;
         }
