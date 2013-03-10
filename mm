@@ -37,7 +37,7 @@ class mm {
         if ($cmd == 'unmount' OR $cmd == 'un') {
             $this->unmount($args[0]);
         }
-        else if ($cmd == 'list' OR $cmd == 'list') {
+        else if ($cmd == 'list' OR $cmd == 'ls') {
             $this->ls();
         }
         else if ($cmd == 'remove') {
@@ -46,11 +46,11 @@ class mm {
         else if ($cmd == 'add') {
             $this->add();
         }
-        else if ($cmd == 'install') {
-            $this->install();
-        }
         else if (in_array($cmd, $launch)) {
             $this->launch($cmd);
+        }
+        else if ($cmd == '-h' OR $cmd == '--help' OR $cmd == 'help') {
+            $this->help();
         }
         else if ($cmd OR $cmd == 'mount') {
             $this->mount(($cmd == 'mount' ? $args[0] : $cmd));
@@ -75,7 +75,28 @@ class mm {
 
 
     public function help() {
-        echo "HELP\n";
+        $cmds = ' %-10s %s';
+        $lines = array(
+            'usage: mm <command> [<args>]',
+            '',
+            'Commands:',
+            array($cmds, 'add', 'Add a mount'),
+            array($cmds, 'list', 'List mounts'),
+            array($cmds, 'mount', 'Mount'),
+            array($cmds, 'remove', 'Remove a mount'),
+            array($cmds, 'ssh', "Open tab with `ssh` connected to mount settings"),
+            array($cmds, 'subl', "Open Submlime Text to local mount folder"),
+            array($cmds, 'unmount', 'Unmount'),
+            '',
+            'Helpful Shortcuts:',
+            ' mm mount all',
+            ' mm unmount all'
+        );
+        foreach ($lines as $line) {
+            echo (is_array($line) ? call_user_func_array('sprintf', $line) : $line)."\n";
+        }
+        echo "\n";
+        return;
     }
 
     public function mount($name) {
