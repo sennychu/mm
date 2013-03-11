@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 ////////////////////////////////////////////////////
-// Copyright 2010-2011 Travis Kuhl (travis@kuhl.co)
+// Copyright 2013 Travis Kuhl (travis@kuhl.co)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
 // files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
@@ -225,12 +225,13 @@ class mm {
             echo "No mount '$name'.\n"; return;
         }
         $cfg = $this->cfg[$name];
+
         switch($cmd) {
             case 'ssh':
                 $run = "ssh -p {$cfg['port']} {$cfg['username']}@{$cfg['host']}";
                 exec('osascript -e "tell application \"Terminal\"" -e "tell application \"System Events\" to keystroke \"t\" using {command down}" -e "do script \"'.$run.'\" in front window" -e "end tell" > /dev/null'); break;
             case 'subl':
-                exec("/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl {$cfg['local']}"); break;
+                exec("/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl '{$cfg['local']}'"); break;
             default:
                 echo "Unknown launch command\n";
         };
