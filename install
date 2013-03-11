@@ -13,4 +13,4 @@ else {
     echo `sudo chmod 755 /usr/local/bin/mm`;
 }
 
-echo "DONE\n";
+echo "Installed. Get started with `mm add`.\n";
