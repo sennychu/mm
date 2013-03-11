@@ -99,7 +99,7 @@ class mm {
         return;
     }
 
-    public function mount($name) {
+    public function mount($name='all') {
         if ($name === 'all') {return $this->_all('mount');}
         if (!array_key_exists($name, $this->cfg)) {
             echo "No mount named '$name'. Try `./mm add` first\n"; return;
@@ -128,11 +128,11 @@ class mm {
         // get our pout
         $this->cfg[$name]['pid'] = exec("ps aux | grep '$cmd' | grep -v grep | awk '{ print $2 }' | head -1");
 
-        echo "Mounted!\n";
+        echo "Mounted '$name'!\n";
 
     }
 
-    public function unmount($name) {
+    public function unmount($name='all') {
         if ($name === 'all') {return $this->_all('unmount');}
         if (!array_key_exists($name, $this->cfg)) {
             echo "No mount '$name'.\n"; return;
@@ -166,7 +166,7 @@ class mm {
 
         $this->cfg[$name]['pid'] = false;
 
-        echo "Unmounted!\n";
+        echo "Unmounted '$name'!\n";
 
         return;
 
