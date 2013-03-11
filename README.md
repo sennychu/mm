@@ -33,14 +33,22 @@ mount settings are stored in `~/.mm`
 Commands
 ----------------
     add - add mount settings
-    mount - mount from existing settings
-    unmount - unmount a mounted drive
-    remove - remove mount settings
     list - list save mount settings
+    mount - mount from existing settings
+    remove - remove mount settings
+    ssh - launch a new Terminal tab and ssh to mount
+    subl - launch Submlime Text in mount local folder
+    unmount - unmount a mounted drive
+
+Helpful Shortcuts
+-------------------
+    `mm mount all` - mount all settings
+    `mm unmount all` - unmount all settings
+
 
 Liscense
 ----------------
-Copyright 2010-2011 Travis Kuhl.
+Copyright 2013 Travis Kuhl.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
